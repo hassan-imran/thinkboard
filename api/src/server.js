@@ -12,15 +12,11 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const __dirname = path.resolve();
 
 // app.get("/api/notes", (req, res)=> {
 //     res.status(200).send("Lorem ipsum")
 // })
-
-if (process.env.NODE_ENV !== "production") {
-    app.use(cors());
-}
+app.use(cors());
 
 app.use(express.json()); // Middleware to get the req parameters
 
@@ -32,14 +28,6 @@ app.use(express.json()); // Middleware to get the req parameters
 
 app.use(rateLimiter);
 app.use("/api/notes", notesRoutes);
-
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/dist")));
-
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
-    })
-}
 
 connectDB().then(() => {
     app.listen(PORT, () => {
