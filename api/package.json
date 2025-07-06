@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js",
+    "postinstall": "cd ../client && npm install && npm run build",
     "start": "node src/server.js"
   },
   "type": "module",
@@ -17,7 +18,8 @@
     "cors": "^2.8.5",
     "dotenv": "^17.0.0",
     "express": "^5.1.0",
-    "mongoose": "^8.16.1"
+    "mongoose": "^8.16.1",
+    "thinkboard": "file:.."
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
