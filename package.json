@@ -1,0 +1,29 @@
+{
+    "name": "fullstack-app",
+    "scripts": {
+        "build": "cd client && npm run build"
+    },
+    "builds": [
+        {
+            "src": "api/src/server.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "client/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "api/src/server.js"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "client/dist/index.html"
+        }
+    ]
+}
